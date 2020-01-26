@@ -22,7 +22,6 @@ Render_World::~Render_World()
 // to ensure that hit.dist>=small_t.
 Hit Render_World::Closest_Intersection(const Ray& ray)
 {
-    TODO;
     double min_t = std::numeric_limits<double>::max();
     //the hit to store, set dist to min_t so anything smaller will be recorded
     Hit closest_hit;
@@ -40,7 +39,7 @@ Hit Render_World::Closest_Intersection(const Ray& ray)
 // set up the initial view ray and call
 void Render_World::Render_Pixel(const ivec2& pixel_index)
 {
-    TODO; // set up the initial view ray here
+    // set up the initial view ray here
     Ray ray;
     ray.endpoint = camera.position;
     ray.direction = (camera.World_Position(pixel_index)- camera.position).normalized();
