@@ -64,7 +64,7 @@ vec3 Render_World::Cast_Ray(const Ray& ray,int recursion_depth)
     vec3 color;
     Hit closest_hit = Closest_Intersection(ray);
     if(closest_hit.object != nullptr){
-        Object *intersected_obj = closest_hit.object;
+        const Object *intersected_obj = closest_hit.object;
         vec3 intersected_pt = ray.Point(closest_hit.dist);
         vec3 normal = intersected_obj->Normal(intersected_pt, closest_hit.part);
         
