@@ -29,7 +29,7 @@ Hit Render_World::Closest_Intersection(const Ray& ray)
     Hit man;
     closest_hit.dist = min_t;
     for(unsigned int i = 0; i < objects.size(); i++){
-        man = objects[i]->Intersection(ray, objects[i]->number_parts);
+        man = objects[i]->Intersection(ray, 0);
         if(man.dist < closest_hit.dist && man.dist > small_t){
             closest_hit = man;
         }
