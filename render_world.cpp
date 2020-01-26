@@ -25,6 +25,7 @@ Hit Render_World::Closest_Intersection(const Ray& ray)
     double min_t = std::numeric_limits<double>::max();
     //the hit to store, set dist to min_t so anything smaller will be recorded
     Hit closest_hit;
+    closest_hit.object = nullptr;
     Hit man;
     closest_hit.dist = min_t;
     for(unsigned int i = 0; i < objects.size(); i++){
