@@ -8,8 +8,7 @@ Hit Sphere::Intersection(const Ray& ray, int part) const
     vec3 v = ray.endpoint - center;
     double delta = pow(dot(ray.direction,v),2) - (dot(ray.direction,ray.direction))*(dot(v,v)-pow(radius,2));
     
-    if ( delta >= 0)
-        {
+    if ( delta >= 0){
         double t1 = -(dot(ray.direction,v)) + sqrt(delta);
         //double t2 = -(dot(ray.direction,v)) - sqrt(delta);
         
@@ -22,10 +21,8 @@ Hit Sphere::Intersection(const Ray& ray, int part) const
         //    hits.push_back(h2);
         return h1;
         }
-    
-    
-    
-    
+    Hit hit;
+    return hit;
     /*
     vec3 endpt_to_center = center - ray.endpoint;
     double time = dot(endpt_to_center, ray.direction);
@@ -47,9 +44,6 @@ Hit Sphere::Intersection(const Ray& ray, int part) const
     vec3 normal = normalize(t1p - s);
     col = vec3(dot(normal, sphereToOrigin));
     */
-    
-    
-    
    // return {0,0,0};
 }
 
