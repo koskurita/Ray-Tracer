@@ -8,7 +8,7 @@ Hit Sphere::Intersection(const Ray& ray, int part) const
     
     vec3 L = center - ray.endpoint;
     double tca = dot(ray.direction, p);
-    if(t < 0){
+    if(tca < 0){
         return hit;
     }
     double d = sqrt(dot(L, L) - dot(tca, tca));
@@ -19,8 +19,8 @@ Hit Sphere::Intersection(const Ray& ray, int part) const
     
     double thc = sqrt(radius*radius - d*d);
     
-    double t1 = t - thc;
-    double t2 = t + thc;
+    double t1 = tca - thc;
+    double t2 = tca + thc;
     
     if(t1 < t2){
         return {this, t1, 0};
