@@ -4,16 +4,16 @@
 // Determine if the ray intersects with the sphere
 Hit Sphere::Intersection(const Ray& ray, int part) const
 {
-    Hit hit = {__null, 0, 0};
+    Hit null;
     
     double b = dot(ray.direction, (ray.endpoint - center));
     double c = dot((ray.endpoint - center), (ray.endpoint - center)) - radius*radius;
     
     if(b*b-c < 0){
-        return hit;
+        return null;
     }
-    double t1 = b - sqrt(b*b)-c;
-    double t2 = b + sqrt(b*b)-c;
+    double t1 = -b - sqrt(b*b)-c;
+    double t2 = -b + sqrt(b*b)-c;
     
     if(t1 < 0){
         return {this, t2, 0};
@@ -28,7 +28,7 @@ Hit Sphere::Intersection(const Ray& ray, int part) const
         return {this, t2, 0};
     }
     else{
-        return {__null, 0, 0};
+        return null;
     }
 
     
