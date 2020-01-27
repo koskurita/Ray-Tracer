@@ -25,7 +25,7 @@ Hit Render_World::Closest_Intersection(const Ray& ray)
     double min_t = std::numeric_limits<double>::max();
     //the hit to store, set dist to min_t so anything smaller will be recorded
     Hit closest_hit;
-    closest_hit.object = nullptr;
+    closest_hit.object = __null;
     closest_hit.dist = min_t;
     
     Hit man;
@@ -65,7 +65,7 @@ vec3 Render_World::Cast_Ray(const Ray& ray,int recursion_depth)
 {
     vec3 color;
     Hit closest_hit = Closest_Intersection(ray);
-    if(closest_hit.object != nullptr){
+    if(closest_hit.object != __null){
         const Object *intersected_obj = closest_hit.object;
         vec3 intersection_pt = ray.Point(closest_hit.dist);
         vec3 normal = intersected_obj->Normal(intersection_pt, closest_hit.part);
