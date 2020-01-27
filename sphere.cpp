@@ -7,7 +7,7 @@ Hit Sphere::Intersection(const Ray& ray, int part) const
     Hit null = {__null, 0, 0};
     
     vec3 L = ray.endpoint - center;
-    double b = dot(2*ray.direction, L);
+    double b = dot(ray.direction*2, L);
     double c = dot(L, L) - radius*radius;
     
     double discriminant = b*b - 4*c;
