@@ -20,7 +20,7 @@ Hit Sphere::Intersection(const Ray& ray, int part) const
     return hit;
      */
     
-    vec3f L = center - ray.endpoint;
+    vec3 L = center - ray.endpoint;
     double tca = dot(L, ray.direction);
     if(tca < 0){
         return {nullptr, 0, 0};
