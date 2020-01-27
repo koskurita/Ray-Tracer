@@ -8,8 +8,10 @@ Hit Sphere::Intersection(const Ray& ray, int part) const
     
     vec3 p = center - ray.endpoint;
     double t = dot(ray.direction, p);
+    if(t < 0){
+        return hit;
+    }
     vec3 tca = ray.Point(t);
-    
     double d = sqrt(dot(p, p) - dot(tca, tca));
     
     if(d > radius){
