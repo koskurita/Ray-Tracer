@@ -24,7 +24,9 @@ Hit Sphere::Intersection(const Ray& ray, int part) const
     double delta = pow(dot(ray.direction,v),2) - (dot(ray.direction,ray.direction))*(dot(v,v)-pow(radius,2));
     
     if ( delta > 0){
-        std::cout << delta << " ";
+        if(delta >= 4){
+            std::cout << delta << " ";
+        }
         double t1 = -(dot(ray.direction,v)) + sqrt(delta);
         double t2 = -(dot(ray.direction,v)) - sqrt(delta);
         double temp;
