@@ -19,29 +19,28 @@ Hit Sphere::Intersection(const Ray& ray, int part) const
 
     return hit;
      */
+    vec3 v = ray.endpoint - this->center;
+    vec3 w = ray.direction;
     
-    vec3 v = ray.endpoint - center;
-    double delta = pow(dot(ray.direction,v),2) - (dot(ray.direction,ray.direction))*(dot(v,v)-pow(radius,2));
+    //std::cout << "Our sphere's center : " << this->center << '\n';
+    //std::cout << "Our vectors : " << v << '|' << w << '\n';
     
-    if ( delta > 0){
-        if(delta >= 4){
-            std::cout << delta << " ";
-        }
-        double t1 = -(dot(ray.direction,v)) + sqrt(delta);
-        double t2 = -(dot(ray.direction,v)) - sqrt(delta);
-        double temp;
-        if(t1 > t2){
-            temp = t2;
-        }
-        else{
-            temp = t1;
-        }
-        if(temp >= 0){
-            return {this, temp, this->number_parts};
-        }
-        }
-    std::cout << "hello";
-    return {nullptr, 0, this->number_parts};
+    double D = pow(dot(w, v),2) - (v.magnitude_squared()-pow(radius,2));
+    //if (D >= 0) std::cout << "Our determinant: " << D << '\n';
+    //std::cout << "Our dot(w,v): " << dot(w,v) << '\n';
+    if (D < 0) return false;
+    else if (D == 0) {
+        double t = -dot(w,v);
+        return {this, t, number_parts};
+    }
+    else if (D > 0) {
+        double t0 = -dot(w,v)-sqrt(D);
+        double t1 = -dot(w,v)+sqrt(D);
+        if (t0 >= t1) { double tmp = t0; t0 = t1; t1 = tmp; }
+        if (t0 < 0) t0 = 0;
+        return {this, t0, number_parts};
+    }
+    return {nullptr, 0, 0};
     
     /*
     vec3 t1p = ro + rd * t1;
