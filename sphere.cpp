@@ -47,7 +47,7 @@ Hit Sphere::Intersection(const Ray& ray, int part) const
         }
         return {this, t0, number_parts};
     }
-    return {nullptr, 0, 0};
+    return {0, 0, 0};
     
     /*
     vec3 t1p = ro + rd * t1;
