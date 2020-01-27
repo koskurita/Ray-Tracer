@@ -6,21 +6,14 @@ Hit Sphere::Intersection(const Ray& ray, int part) const
 {
     Hit hit = {nullptr, 0, 0};
     
-    vec3 L = center - ray.endpoint;
-    double tca = dot(ray.direction, L);
-    if(tca < 0){
+    double b = dot(ray.direction, (ray.endpoint - center));
+    double c = dot((ray.endpoint - center), (ray.endpoint - center)) - radius*radius;
+    
+    if(b*b-c < 0){
         return hit;
     }
-    double d = sqrt(dot(L, L) - tca*tca);
-    
-    if(d < 0  || d > radius){
-        return {nullptr, 0, 0};
-    }
-    
-    double thc = sqrt(radius*radius - d*d);
-    
-    double t1 = tca - thc;
-    double t2 = tca + thc;
+    double t1 = -b - sqrt(b*b-c);
+    double t2 = -b +sqrt(b*b-c);
     
     if(t1 < t2){
         return {this, t1, 0};
@@ -29,21 +22,6 @@ Hit Sphere::Intersection(const Ray& ray, int part) const
         return {this, t2, 0};
     }
     return hit;
-    
-    /*
-    double time = dot(endpt_to_center, ray.direction);
-    vec3 t = ray.Point(time);
-    vec3 vec_t = center - t;
-    double distance_x = sqrt(pow(radius, 2) - vec_t.magnitude_squared());
-    double intersection_time = time - distance_x;
-    
-    Hit hit;
-    hit.object = this;
-    hit.dist = intersection_time;
-    hit.part = 0;
-
-    return hit;
-     */
     
 }
 
