@@ -19,43 +19,26 @@ Hit Sphere::Intersection(const Ray& ray, int part) const
 
     return hit;
      */
-    vec3 v = ray.endpoint - this->center;
-    vec3 w = ray.direction;
     
-    //std::cout << "Our sphere's center : " << this->center << '\n';
-    //std::cout << "Our vectors : " << v << '|' << w << '\n';
+    Vec3f L = center - ray.endpoint;
+    double tca = dot(L, dir);
+    if(tca < 0){
+        return {nullptr, 0, 0}
+    }
+    // if (tca < 0) return false;
+    double d2 = dot(L, L) - tca * tca;
+    if (d2 > radius*radius) return false;
+    double thc = sqrt(radius*radius - d2);
+    t0 = tca - thc;
+    t1 = tca + thc;
+    if(t0 < t1){
+        return {this, t0, 0};
+    }
+    else{
+        return {this, t1, 0};
+    }
+    return {0,0, 0}
     
-    double D = pow(dot(w, v),2) - (v.magnitude_squared()-pow(radius,2));
-    //if (D >= 0) std::cout << "Our determinant: " << D << '\n';
-    //std::cout << "Our dot(w,v): " << dot(w,v) << '\n';
-    if (D < 0){
-        std::cout << "gg ";
-         return {nullptr, 0, 0};
-    }
-    else if (D == 0) {
-        double t = -dot(w,v);
-        return {this, t, number_parts};
-    }
-    else if (D > 0) {
-        double t0 = -dot(w,v)-sqrt(D);
-        double t1 = -dot(w,v)+sqrt(D);
-        if (t0 >= t1){
-            double tmp = t0; t0 = t1; t1 = tmp;
-        }
-        if (t0 < 0){
-            t0 = 0;
-        }
-        return {this, t0, number_parts};
-    }
-    return {0, 0, 0};
-    
-    /*
-    vec3 t1p = ro + rd * t1;
-    vec3 sphereToOrigin = normalize(ro - s);
-    vec3 normal = normalize(t1p - s);
-    col = vec3(dot(normal, sphereToOrigin));
-    */
-   // return {0,0,0};
 }
 
 vec3 Sphere::Normal(const vec3& point, int part) const
