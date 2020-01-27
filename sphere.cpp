@@ -27,8 +27,8 @@ Hit Sphere::Intersection(const Ray& ray, int part) const
     }
     // if (tca < 0) return false;
     double d2 = dot(L, L) - tca * tca;
-    if (d2 > radius*radius) return {0,0,0};
-    double thc = sqrt(radius*radius - d2);
+    if (d2 > radius) return {0,0,0};
+    double thc = sqrt(radius - d2);
     double t0 = tca - thc;
     double t1 = tca + thc;
     if(t0 < t1){
