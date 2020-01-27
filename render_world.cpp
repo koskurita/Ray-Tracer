@@ -71,7 +71,7 @@ vec3 Render_World::Cast_Ray(const Ray& ray,int recursion_depth)
         vec3 intersection_pt = ray.Point(closest_hit.dist);
         vec3 normal = closest_hit.object->Normal(ray.Point(closest_hit.dist), closest_hit.part);
         
-        color = intersected_obj->material_shader->Shade_Surface(ray, ray.Point(closest_hit.dist), normal, recursion_depth);
+        color = closest_hit.object>material_shader->Shade_Surface(ray, ray.Point(closest_hit.dist), normal, recursion_depth);
     }
     else{
         color = background_shader->Shade_Surface(ray, ray.endpoint, ray.endpoint, recursion_depth);
