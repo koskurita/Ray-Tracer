@@ -29,7 +29,7 @@ Hit Sphere::Intersection(const Ray& ray, int part) const
     //if (D >= 0) std::cout << "Our determinant: " << D << '\n';
     //std::cout << "Our dot(w,v): " << dot(w,v) << '\n';
     if (D < 0){
-        std::cout < "gg ";
+        std::cout << "gg ";
          return {nullptr, 0, 0};
     }
     else if (D == 0) {
