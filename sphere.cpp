@@ -15,6 +15,7 @@ Hit Sphere::Intersection(const Ray& ray, int part) const
     double t1 = -b - sqrt(b*b)-c;
     double t2 = -b + sqrt(b*b)-c;
     
+    std::cout << "hello";
     if(t1 < 0){
         return {this, t2, 0};
     }
