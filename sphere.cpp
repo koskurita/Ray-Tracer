@@ -20,24 +20,24 @@ Hit Sphere::Intersection(const Ray& ray, int part) const
     return hit;
      */
     
-    Vec3f L = center - ray.endpoint;
-    double tca = dot(L, dir);
+    vec3f L = center - ray.endpoint;
+    double tca = dot(L, ray.direction);
     if(tca < 0){
-        return {nullptr, 0, 0}
+        return {nullptr, 0, 0};
     }
     // if (tca < 0) return false;
     double d2 = dot(L, L) - tca * tca;
-    if (d2 > radius*radius) return false;
+    if (d2 > radius*radius) return {0,0,0};
     double thc = sqrt(radius*radius - d2);
-    t0 = tca - thc;
-    t1 = tca + thc;
+    double t0 = tca - thc;
+    double t1 = tca + thc;
     if(t0 < t1){
         return {this, t0, 0};
     }
     else{
         return {this, t1, 0};
     }
-    return {0,0, 0}
+    return {0,0, 0};
     
 }
 
