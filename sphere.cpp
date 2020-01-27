@@ -28,7 +28,7 @@ Hit Sphere::Intersection(const Ray& ray, int part) const
     double D = pow(dot(w, v),2) - (v.magnitude_squared()-pow(radius,2));
     //if (D >= 0) std::cout << "Our determinant: " << D << '\n';
     //std::cout << "Our dot(w,v): " << dot(w,v) << '\n';
-    if (D < 0) return false;
+    if (D < 0) return {nullptr, 0, 0};
     else if (D == 0) {
         double t = -dot(w,v);
         return {this, t, number_parts};
