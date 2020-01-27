@@ -6,15 +6,14 @@ Hit Sphere::Intersection(const Ray& ray, int part) const
 {
     Hit hit = {nullptr, 0, 0};
     
-    vec3 p = center - ray.endpoint;
-    double t = dot(ray.direction, p);
+    vec3 L = center - ray.endpoint;
+    double tca = dot(ray.direction, p);
     if(t < 0){
         return hit;
     }
-    vec3 tca = ray.Point(t);
-    double d = sqrt(dot(p, p) - dot(tca, tca));
+    double d = sqrt(dot(L, L) - dot(tca, tca));
     
-    if(d > radius){
+    if(d < radius){
         return {nullptr, 0, 0};
     }
     
