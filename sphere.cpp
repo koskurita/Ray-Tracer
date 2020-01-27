@@ -13,7 +13,7 @@ Hit Sphere::Intersection(const Ray& ray, int part) const
     }
     double d = sqrt(dot(L, L) - tca*tca);
     
-    if(d < 0){
+    if(d < 0  || d > radius){
         return {nullptr, 0, 0};
     }
     
