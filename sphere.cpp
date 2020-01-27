@@ -4,9 +4,8 @@
 // Determine if the ray intersects with the sphere
 Hit Sphere::Intersection(const Ray& ray, int part) const
 {
-    
-    
-    vec3 endpt_to_center = center - ray.endpoint;
+    /*
+    vec3 endpt_to_center = ray.endpoint - center;
     double time = dot(endpt_to_center, ray.direction);
     vec3 t = ray.Point(time);
     vec3 vec_t = center - t;
@@ -19,7 +18,26 @@ Hit Sphere::Intersection(const Ray& ray, int part) const
     hit.part = 0;
 
     return hit;
+     */
     
+    vec3 v = ray.endpoint - center;
+    double delta = pow(dot(ray.direction,v),2) - (dot(ray.direction,ray.direction))*(dot(v,v)-pow(radius,2));
+    
+    if ( delta > 0){
+        double t1 = -(dot(ray.direction,v)) + sqrt(delta);
+        double t2 = -(dot(ray.direction,v)) - sqrt(delta);
+        double temp;
+        if(t1 > t2){
+            temp = t2;
+        }
+        else{
+            temp = t1;
+        }
+        if(temp >= 0){
+            return {this, temp, 0};
+        }
+        }
+    return {nullptr, 0, 0};
     
     /*
     vec3 t1p = ro + rd * t1;
