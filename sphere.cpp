@@ -34,10 +34,10 @@ Hit Sphere::Intersection(const Ray& ray, int part) const
             temp = t1;
         }
         if(temp >= 0){
-            std::cout << "hello";
-            return {this, temp, 0};
+            return {this, temp, this->number_parts};
         }
         }
+    std::cout << "hello";
     return {nullptr, 0, this->number_parts};
     
     /*
