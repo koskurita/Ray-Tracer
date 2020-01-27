@@ -6,8 +6,9 @@ Hit Sphere::Intersection(const Ray& ray, int part) const
 {
     Hit null;
     
+    
     double b = dot(ray.direction, (ray.endpoint - center));
-    double c = dot((ray.endpoint - center), (ray.endpoint - center)) - radius*radius;
+    double c = dot((ray.direction), (ray.direction))*dot((ray.endpoint - center), (ray.endpoint - center)) - radius*radius;
     
     if(b*b-c < 0){
         return null;
