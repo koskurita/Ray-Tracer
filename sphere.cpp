@@ -19,7 +19,7 @@ Hit Sphere::Intersection(const Ray& ray, int part) const
 
     return hit;
      */
-    std:: cout << ray;
+    std:: cout << ray.endpoint << " " << ray.direction << std::endl;
     vec3 v = ray.endpoint - this->center;
     vec3 w = ray.direction;
     
