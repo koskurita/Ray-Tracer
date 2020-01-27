@@ -20,11 +20,11 @@ Hit Sphere::Intersection(const Ray& ray, int part) const
         return {this, t2, 0};
     }
     else if(t2 < 0){
-                std::cout << "hello";
+    //            std::cout << "hello";
         return {this, t1, 0};
     }
     else if(t1 < t2){
-    //            std::cout << "hello";
+                std::cout << "hello";
         return {this, t1, 0};
     }
     else if(t2 > t1){
