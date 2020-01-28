@@ -8,7 +8,7 @@ Hit Sphere::Intersection(const Ray& ray, int part) const
     
     vec3 L = ray.endpoint - center;
     double b = dot(ray.direction, L);
-    b = 2b;
+    b = 2*b;
     double c = dot(L, L) - radius*radius;
     
     
