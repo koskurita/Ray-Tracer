@@ -22,10 +22,9 @@ Shade_Surface(const Ray& ray,const vec3& intersection_point,
          interception.endpoint = intersection_point;
          interception.direction = -lightRay.direction;
          Hit test = world.Closest_Intersection(interception);
-         // test if anything in the way
          if(test.object == __null){
              lightColor = world.lights[i]->Emitted_Light(lightRay.direction);
-             lightColor = lightColor.normalized();
+             lightColor /= sqrdLight;
              double temp = std::max(dot(lightRay.direction, normal) , 0.0);
              color = (lightColor * color_diffuse * temp);
 
