@@ -7,22 +7,23 @@ Hit Sphere::Intersection(const Ray& ray, int part) const
     Hit null = {__null, 0, 0};
     
     vec3 L = ray.endpoint - center;
-    double b = dot(ray.direction*2, L);
+    double b = dot(ray.direction, L);
+    b = 2b;
     double c = dot(L, L) - radius*radius;
     
     
-    double discriminant = (b*b) - (4*c);
+    double delta = (b*b) - (4*c);
     
-        std::cout << discriminant << " " ;
+    //std::cout << delta << " " ;
     
-    if(discriminant < 0){
+    if(delta < 0){
         std::cout << " test 1";
         return null;
     }
     
-    double t1 = (-1 * b - sqrt(discriminant));
+    double t1 = (-1 * b - sqrt(delta));
     t1 = t1/2;
-    double t2 = (-1 * b + sqrt(discriminant));
+    double t2 = (-1 * b + sqrt(delta));
     t2 = t2/2;
     
     if(t1 < 0){
