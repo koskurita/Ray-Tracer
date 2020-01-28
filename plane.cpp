@@ -11,18 +11,18 @@ Hit Plane::Intersection(const Ray& ray, int part) const
     double numerator = dot((x1 - ray.endpoint), normal);
     double denominator = dot(ray.direction, normal);
     
-    if(denominator > 0){
+    if(denominator){
         double t = numerator/denominator;
         if(t > 0){
-            return {this, t, 0};
+            Hit hit = {this, t, 0};
+            return hit
         }
         else{
-            return{0, 0, 0};
+            Hit hit = {this, 0, 0};
         }
     }
-    
-    
-    return {__null,0,0};
+    Hit hit = {__null,0,0};
+    return hit;
 }
 
 vec3 Plane::Normal(const vec3& point, int part) const
