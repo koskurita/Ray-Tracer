@@ -24,13 +24,9 @@ Shade_Surface(const Ray& ray,const vec3& intersection_point,
          intToLight.direction = intToLight.direction.normalized();
          Hit passToShadow = world.Closest_Intersection(intToLight);
          if(passToShadow.object != __null){
-             if(passToShadow.dist < sqrt(sqrdLight)) {
-                 
-                 continue;
-             }
+             continue;
          }
      }
-     //Calculate Diffuse and Add to color
      lightColor = world.lights.at(i)->Emitted_Light(lightRay.direction);
      lightColor /= sqrdLight;
      double temp = std::max(dot(lightRay.direction, normal) , 0.0);
