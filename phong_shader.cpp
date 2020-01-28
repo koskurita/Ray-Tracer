@@ -14,7 +14,7 @@ Shade_Surface(const Ray& ray,const vec3& intersection_point,
     
     for(unsigned int i = 0; i < world.lights.size(); ++i) {
      lightRay.direction = intersection_point - world.lights.at(i)->position;
-     //double sqrdLight = lightRay.direction.magnitude_squared();
+     double sqrdLight = lightRay.direction.magnitude_squared();
      lightRay.direction = lightRay.direction.normalized();
      lightRay.endpoint = world.lights.at(i)->position;
      if(world.enable_shadows == true) {
