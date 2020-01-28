@@ -16,9 +16,6 @@ Hit Sphere::Intersection(const Ray& ray, int part) const
     
     //std::cout << delta << " " ;
     
-    std::cout << dot(ray.direction, ray.direction) << " ";
-    
-    
     if(delta < 0){
         std::cout << " test 1";
         return null;
@@ -30,13 +27,11 @@ Hit Sphere::Intersection(const Ray& ray, int part) const
     t2 = t2/2;
     
     if(t1 < 0){
-        std::cout << " test 2";
     //            std::cout << "hello";
         Hit hit = {this, t2, 0};
         return hit;
     }
     else if(t2 < 0){
-        std::cout << " test 3";
       Hit hit = {this, t1, 0};
         return hit;
     }
@@ -47,13 +42,11 @@ Hit Sphere::Intersection(const Ray& ray, int part) const
         return hit;
     }
     else if(t2 > t1){
-        std::cout << " test 5";
     //            std::cout << "hello";
         Hit hit = {this, t2, 0};
         return hit;
     }
     else{
-        std::cout << " test 6";
         return null;
     }
 
