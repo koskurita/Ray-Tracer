@@ -7,13 +7,12 @@ Hit Sphere::Intersection(const Ray& ray, int part) const
     Hit null = {__null, 0, 0};
     
     vec3 L = ray.endpoint - center;
-    double a = dot(ray.direction, ray.direction);
     double b = dot(ray.direction, L);
     b = 2*b;
     double c = dot(L, L) - radius*radius;
     
     
-    double delta = (b*b) - (4*a* c);
+    double delta = (b*b) - (4*c);
     
     //std::cout << delta << " " ;
     
