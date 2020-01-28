@@ -9,35 +9,20 @@ Shade_Surface(const Ray& ray,const vec3& intersection_point,
     const vec3& normal,int recursion_depth) const
 {
     vec3 color;
-    Ray lightRay;
-    vec3 lightColor;
+    Ray light_ray;
+    vec3 light_color;
     
     for(unsigned int i = 0; i < world.lights.size(); ++i) {
-     lightRay.direction = world.lights.at(i)->position - intersection_point;
-     double sqrdLight = lightRay.direction.magnitude_squared();
-     lightRay.direction = lightRay.direction.normalized();
-     lightRay.endpoint = world.lights.at(i)->position;
+     light_ray.direction = world.lights.at(i)->position - intersection_point;
+     double mag_squared = light_ray.direction.magnitude_squared();
+     light_ray.direction = light_ray.direction.normalized();
+     light_ray.endpoint = world.lights.at(i)->position;
         
-     lightColor = world.lights[i]->Emitted_Light(lightRay.direction);
-     lightColor = lightColor/sqrdLight;
-     double temp = std::max(dot(lightRay.direction, normal) , 0.0);
-     color = (lightColor * color_diffuse * temp);
+     light_color = world.lights[i]->Emitted_Light(light_ray.direction);
+     light_color = light_color/mag_squared;
+     double temp = std::max(dot(light_ray.direction, normal) , 0.0);
+     color = (light_color * color_diffuse * temp);
     }
-    
-    
-    /*
-    for(unsigned int i = 0; i < world.lights.size(); i++){
-        light_ray.direction = intersection_point - world.lights[i]->position;
-        light_ray.direction = light_ray.direction.normalized();
-        light_ray.endpoint = world.lights[i]->position;
-        
-        vec3 intensity = world.lights[i]->Emitted_Light(light_ray.direction);
-        
-        double gg = std::max(0.0, dot(normal.normalized(), light_ray.direction));
-        
-        color = gg * color_diffuse * intensity;
-    }
-     */
     
     return color;
 }
