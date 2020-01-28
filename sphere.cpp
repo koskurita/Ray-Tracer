@@ -17,7 +17,6 @@ Hit Sphere::Intersection(const Ray& ray, int part) const
     //std::cout << delta << " " ;
     
     if(delta < 0){
-        std::cout << " test 1";
         return null;
     }
     
