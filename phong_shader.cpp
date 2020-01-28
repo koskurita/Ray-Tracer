@@ -9,7 +9,7 @@ Shade_Surface(const Ray& ray,const vec3& intersection_point,
     const vec3& normal,int recursion_depth) const
 {
     vec3 color;
-    Ray light_ray;
+    Ray lightray;
     vec3 lightColor;
     
     for(unsigned int i = 0; i < world.lights.size(); ++i) {//Loop through lights
