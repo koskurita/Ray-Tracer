@@ -31,7 +31,7 @@ Shade_Surface(const Ray& ray,const vec3& intersection_point,
          }
      }
      //Calculate Diffuse and Add to color
-     lightColor = world.lights.at(i)->Emitted_Light(lightRay);
+     lightColor = world.lights.at(i)->Emitted_Light(lightRay.direction);
      lightColor /= sqrdLight;
      double temp = std::max(dot(lightRay.direction, normal) , 0.0);
      color += (lightColor * color_diffuse * temp);
