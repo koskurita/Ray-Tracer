@@ -17,7 +17,7 @@ Shade_Surface(const Ray& ray,const vec3& intersection_point,
         light_ray.endpoint = world.lights[i]->position;
         
         vec3 l = intersection_point - world.lights[i].position;
-        vec3 intensity = world.lights[i]->Emitted_Light(light_ray);
+        vec3 intensity = world.lights[i]->Emitted_Light(light_ray.direction);
         
         color = (intensity * color_diffuse * world.lights[i].brightness  * std::max(0.0, dot(normal.normalized(), l)));
     }
