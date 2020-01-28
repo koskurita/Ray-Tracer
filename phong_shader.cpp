@@ -9,32 +9,29 @@ Shade_Surface(const Ray& ray,const vec3& intersection_point,
     const vec3& normal,int recursion_depth) const
 {
     vec3 color;
-    Ray lightRay;
-    vec3 lightColor;
+    Ray light_ray;
     
-    for(unsigned int i = 0; i < world.lights.size(); ++i) {//Loop through lights
-     lightRay.direction = world.lights.at(i)->position - intersection_point;//Calculate Direction
-     double sqrdLight = lightRay.direction.magnitude_squared();
-     lightRay.direction = lightRay.direction.normalized();//Normalize
-     lightRay.endpoint = world.lights.at(i)->position;//Get the position
-     if(world.enable_shadows) {//Check if shadows are on
+    for(unsigned int i = 0; i < world.lights.size(); ++i) {
+     light_ray.direction = world.lights.at(i)->position - intersection_point;
+     double sqrdLight = light_ray.direction.magnitude_squared();
+     light_ray.direction = light_ray.direction.normalized();
+     light_ray.endpoint = world.lights.at(i)->position;
+     if(world.enable_shadows) {
          Ray intToLight;
          intToLight.endpoint = intersection_point;
-         intToLight.direction = lightRay.direction;
+         intToLight.direction = light_ray.direction;
          intToLight.direction = intToLight.direction.normalized();
          Hit passToShadow = world.Closest_Intersection(intToLight);
-         if(passToShadow.object != __null){//If there's something in the ray
-             if(passToShadow.dist < sqrt(sqrdLight)) {//If the object is closer than int_point
-                 
-                 continue; //skip adding diffuse and specular
+         if(passToShadow.object != __null){
+             if(passToShadow.dist < sqrt(sqrdLight)) {
+                 vec3 lightColor;
+                 lightColor = world.lights.at(i)->Emitted_Light(light_ray.direction);
+                 lightColor = lightColor.normalized();
+                 double temp = std::max(dot(light_ray.direction, normal) , 0.0);
+                 color = (lightColor * color_diffuse * temp);
              }
          }
      }
-     //Calculate Diffuse and Add to color
-     lightColor = world.lights.at(i)->Emitted_Light(lightRay.direction);
-     lightColor /= sqrdLight;
-     double temp = std::max(dot(lightRay.direction, normal) , 0.0);
-     color = (lightColor * color_diffuse * temp);
     }
     
     
