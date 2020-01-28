@@ -18,12 +18,12 @@ Shade_Surface(const Ray& ray,const vec3& intersection_point,
      lightRay.direction = lightRay.direction.normalized();//Normalize
      lightRay.endpoint = world.lights.at(i)->position;//Get the position
      if(world.enable_shadows) {//Check if shadows are on
-         Hit passToShadow;
          Ray intToLight;
          intToLight.endpoint = intersection_point;
          intToLight.direction = lightRay.direction;
          intToLight.direction = intToLight.direction.normalized();
-         if(world.Closest_Intersection(intToLight, passToShadow)){//If there's something in the ray
+         Hit passToShadow = world.Closest_Intersection(intToLight, 0);
+         if(passToShadow.object != __null)){//If there's something in the ray
              if(passToShadow.dist < sqrt(sqrdLight)) {//If the object is closer than int_point
                  
                  continue; //skip adding diffuse and specular
@@ -34,7 +34,7 @@ Shade_Surface(const Ray& ray,const vec3& intersection_point,
      lightColor = world.lights.at(i)->Emitted_Light(lightRay.direction);
      lightColor /= sqrdLight;
      double temp = std::max(dot(lightRay.direction, normal) , 0.0);
-     color += (lightColor * color_diffuse * temp);
+     color = (lightColor * color_diffuse * temp);
     }
     
     
