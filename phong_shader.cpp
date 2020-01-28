@@ -17,7 +17,7 @@ Shade_Surface(const Ray& ray,const vec3& intersection_point,
      double sqrdLight = lightRay.direction.magnitude_squared();
      lightRay.direction = lightRay.direction.normalized();
      lightRay.endpoint = world.lights.at(i)->position;
-     if(world.enable_shadows) {
+     if(world.enable_shadows == true) {
          Ray intToLight;
          intToLight.endpoint = intersection_point;
          intToLight.direction = lightRay.direction;
@@ -28,7 +28,7 @@ Shade_Surface(const Ray& ray,const vec3& intersection_point,
          }
      }
      lightColor = world.lights.at(i)->Emitted_Light(lightRay.direction);
-     lightColor /= sqrdLight;
+     lightColor = lightColor.normalized();
      double temp = std::max(dot(lightRay.direction, normal) , 0.0);
      color = (lightColor * color_diffuse * temp);
     }
