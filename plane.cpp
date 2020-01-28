@@ -15,10 +15,11 @@ Hit Plane::Intersection(const Ray& ray, int part) const
         double t = numerator/denominator;
         if(t > 0){
             Hit hit = {this, t, 0};
-            return hit
+            return hit;
         }
         else{
             Hit hit = {this, 0, 0};
+            return hit;
         }
     }
     Hit hit = {__null,0,0};
