@@ -13,23 +13,26 @@ Shade_Surface(const Ray& ray,const vec3& intersection_point,
     vec3 lightColor;
     
     for(unsigned int i = 0; i < world.lights.size(); ++i) {
-     lightRay.direction = intersection_point - world.lights.at(i)->position;
+     lightRay.direction = world.lights.at(i)->position - intersection_point;
      double sqrdLight = lightRay.direction.magnitude_squared();
      lightRay.direction = lightRay.direction.normalized();
      lightRay.endpoint = world.lights.at(i)->position;
      if(world.enable_shadows == true) {
-         Ray interception;
-         interception.endpoint = intersection_point;
-         interception.direction = -lightRay.direction;
-         Hit test = world.Closest_Intersection(interception);
-         if(test.object == __null){
-             lightColor = world.lights[i]->Emitted_Light(lightRay.direction);
-             lightColor /= sqrdLight;
-             double temp = std::max(dot(lightRay.direction, normal) , 0.0);
-             color = (lightColor * color_diffuse * temp);
-
+         /*
+         Ray intToLight;
+         intToLight.endpoint = intersection_point;
+         intToLight.direction = lightRay.direction;
+         intToLight.direction = intToLight.direction.normalized();
+         Hit passToShadow = world.Closest_Intersection(intToLight);
+         if(passToShadow.object != __null){
+             continue;
          }
+          */
      }
+     lightColor = world.lights[i]->Emitted_Light(lightRay.direction);
+     lightColor /= sqrdLight;
+     double temp = std::max(dot(lightRay.direction, normal) , 0.0);
+     color = (lightColor * color_diffuse * temp);
     }
     
     
