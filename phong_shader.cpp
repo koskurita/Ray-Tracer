@@ -22,8 +22,8 @@ Shade_Surface(const Ray& ray,const vec3& intersection_point,
          intToLight.endpoint = intersection_point;
          intToLight.direction = lightRay.direction;
          intToLight.direction = intToLight.direction.normalized();
-         Hit passToShadow = world.Closest_Intersection(intToLight, 0);
-         if(passToShadow.object != __null)){//If there's something in the ray
+         Hit passToShadow = world.Closest_Intersection(intToLight);
+         if(passToShadow.object != __null){//If there's something in the ray
              if(passToShadow.dist < sqrt(sqrdLight)) {//If the object is closer than int_point
                  
                  continue; //skip adding diffuse and specular
