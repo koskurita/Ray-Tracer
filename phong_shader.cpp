@@ -26,7 +26,7 @@ Shade_Surface(const Ray& ray,const vec3& intersection_point,
              if(passToShadow.dist < sqrt(sqrdLight)) {
                  vec3 lightColor;
                  lightColor = world.lights.at(i)->Emitted_Light(light_ray.direction);
-                 lightColor = lightColor.normalized();
+                 lightColor /= sqrdLight;
                  double temp = std::max(dot(light_ray.direction, normal) , 0.0);
                  color = (lightColor * color_diffuse * temp);
              }
