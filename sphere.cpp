@@ -10,9 +10,10 @@ Hit Sphere::Intersection(const Ray& ray, int part) const
     double b = dot(ray.direction*2, L);
     double c = dot(L, L) - radius*radius;
     
-    std::cout << radius;
     
     double discriminant = (b*b) - (4*c);
+    
+        std::cout << discriminant << " " ;
     
     if(discriminant < 0){
         std::cout << " test 1";
