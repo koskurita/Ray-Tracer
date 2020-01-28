@@ -9,6 +9,20 @@
 Hit Plane::Intersection(const Ray& ray, int part) const
 {
     TODO;
+    double numerator = dot((x1 - ray.endpoint), normal);
+    double denominator = dot(ray.direction, normal);
+    
+    if(denominator > 0){
+        double t = numerator/denominator;
+        if(t > 0){
+            return {this, t, 0};
+        }
+        else{
+            return{this, 0, 0};
+        }
+    }
+    
+    
     return {0,0,0};
 }
 
