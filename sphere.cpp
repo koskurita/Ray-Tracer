@@ -10,6 +10,8 @@ Hit Sphere::Intersection(const Ray& ray, int part) const
     double b = dot(ray.direction*2, L);
     double c = dot(L, L) - radius*radius;
     
+    std::cout << radius;
+    
     double discriminant = (b*b) - (4*c);
     
     if(discriminant < 0){
@@ -17,8 +19,10 @@ Hit Sphere::Intersection(const Ray& ray, int part) const
         return null;
     }
     
-    double t1 = (-b - sqrt(discriminant))/2;
-    double t2 = (-b + sqrt(discriminant))/2;
+    double t1 = (-1 * b - sqrt(discriminant));
+    t1 = t1/2;
+    double t2 = (-1 * b + sqrt(discriminant));
+    t2 = t2/2;
     
     if(t1 < 0){
         std::cout << " test 2";
@@ -32,7 +36,7 @@ Hit Sphere::Intersection(const Ray& ray, int part) const
         return hit;
     }
     else if(t1 < t2){
-        std::cout << " test 4";
+     //   std::cout << " test 4";
     //            std::cout << "hello";
         Hit hit = {this, t1, 0};
         return hit;
