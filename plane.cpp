@@ -18,12 +18,12 @@ Hit Plane::Intersection(const Ray& ray, int part) const
             return {this, t, 0};
         }
         else{
-            return{this, 0, 0};
+            return{0, 0, 0};
         }
     }
     
     
-    return {0,0,0};
+    return {__null,0,0};
 }
 
 vec3 Plane::Normal(const vec3& point, int part) const
