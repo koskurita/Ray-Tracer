@@ -8,7 +8,6 @@
 // to record a hit with t=0 as the first entry in hits.
 Hit Plane::Intersection(const Ray& ray, int part) const
 {
-    TODO;
     double numerator = dot((x1 - ray.endpoint), normal);
     double denominator = dot(ray.direction, normal);
     
