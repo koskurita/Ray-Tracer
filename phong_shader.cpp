@@ -20,17 +20,16 @@ Shade_Surface(const Ray& ray,const vec3& intersection_point,
         light_ray.direction = light_ray.direction.normalized();
         light_ray.endpoint = world.lights.at(i)->position;
         
-        light_color = world.lights[i]->Emitted_Light(light_ray.direction);
+        light_color = world.lights[i]->Emitted_Light(ray);
         light_color = light_color/mag_squared;
-        
-            double diffuse = std::max(dot(light_ray.direction, normal) , 0.0);
-            color = (light_color * color_diffuse * diffuse);
+        double diffuse = std::max(dot(light_ray.direction, normal) , 0.0);
+        color = (light_color * color_diffuse * diffuse);
             
-            vec3 reflect_dir = (2 * dot(light_ray.direction, normal) * normal) - light_ray.direction;
-            vec3 opposite_normal = ray.direction.normalized() * -1;
-            double specular = std::max(dot(reflect_dir, opposite_normal), 0.0);
-            specular = pow(specular, specular_power);
-            color += (light_color * color_specular * specular);
+        vec3 reflect_dir = (2 * dot(light_ray.direction, normal) * normal) - light_ray.direction;
+        vec3 opposite_normal = ray.direction.normalized() * -1;
+        double specular = std::max(dot(reflect_dir, opposite_normal), 0.0);
+        specular = pow(specular, specular_power);
+        color += (light_color * color_specular * specular);
     }
     
     
