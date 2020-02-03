@@ -26,6 +26,7 @@ Shade_Surface(const Ray& ray,const vec3& intersection_point,
         test.direction = light_ray.direction;
         Hit anything_hit = world.Closest_Intersection(test);
         vec3 gg = world.lights.at(i)->position - intersection_point;
+        if(world.enable_shadows){
         if (anything_hit.dist < gg.magnitude()){
             double temp = std::max(dot(light_ray.direction, normal) , 0.0);
             color = (light_color * color_diffuse * temp);
@@ -35,6 +36,7 @@ Shade_Surface(const Ray& ray,const vec3& intersection_point,
             double specular = std::max(dot(reflect_dir, opposite_normal), 0.0);
             specular = pow(specular, specular_power);
             color += (light_color * color_specular * specular);
+        }
         }
         
         
