@@ -24,7 +24,7 @@ Shade_Surface(const Ray& ray,const vec3& intersection_point,
         double temp = std::max(dot(light_ray.direction, normal) , 0.0);
         color = (light_color * color_diffuse * temp);
         
-        vec3 reflect_dir = (2 * dot(ligh_ray.direction, normal) * normal) - light_ray.direction;
+        vec3 reflect_dir = (2 * dot(light_ray.direction, normal) * normal) - light_ray.direction;
         vec3 opposite_normal = ray.direction * -1;
         double specular = std::max(dot(reflect_dir, opposite_normal), 0.0);
         specular = pow(specular, specular_power);
