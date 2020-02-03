@@ -20,14 +20,15 @@ Shade_Surface(const Ray& ray,const vec3& intersection_point,
         
         light_color = world.lights[i]->Emitted_Light(light_ray.direction);
         light_color = light_color/mag_squared;
+        
         double temp = std::max(dot(light_ray.direction, normal) , 0.0);
         color = (light_color * color_diffuse * temp);
         
-        vec3 reflect_dir = (2 * dot(lightRay.direction, normal) * normal) - light_ray.direction;
+        vec3 reflect_dir = (2 * dot(ligh_ray.direction, normal) * normal) - light_ray.direction;
         vec3 opposite_normal = ray.direction * -1;
         double specular = std::max(dot(reflect_dir, opposite_normal), 0.0);
         specular = pow(specular, specular_power);
-        color += (lightColor * color_specular * specular);
+        color += (light_color * color_specular * specular);
         
         
     }
