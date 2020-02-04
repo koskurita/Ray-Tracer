@@ -22,7 +22,7 @@ Shade_Surface(const Ray& ray,const vec3& intersection_point,
         light_color = light_color/mag_squared;
         
             double temp = std::max(dot(light_ray.direction, normal) , 0.0);
-            color = (light_color * color_diffuse * temp);
+            color += (light_color * color_diffuse * temp);
             
             vec3 reflect_dir = (2 * dot(light_ray.direction, normal) * normal) - light_ray.direction;
             vec3 opposite_normal = ray.direction * -1;
