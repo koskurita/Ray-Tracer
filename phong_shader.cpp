@@ -20,7 +20,7 @@ Shade_Surface(const Ray& ray,const vec3& intersection_point,
         light_ray.direction = light_ray.direction.normalized();
         light_ray.endpoint = world.lights.at(i)->position;
         
-        light_color = world.lights[i]->Emitted_Light(ray);
+        light_color = world.lights[i]->Emitted_Light(light_ray.direction);
         light_color = light_color/mag_squared;
         double diffuse = std::max(dot(light_ray.direction, normal) , 0.0);
         color = (light_color * color_diffuse * diffuse);
